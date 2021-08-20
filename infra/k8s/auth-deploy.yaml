@@ -23,7 +23,7 @@ metadata:
   name: auth-srv
 spec:
   selector:
-    app: auth-depl
+    app: auth 
   ports:
     - name: auth
       protocol: TCP
