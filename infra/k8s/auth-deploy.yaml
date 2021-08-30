@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels: 
+    matchLabels:
       app: auth
   template:
     metadata:
@@ -13,9 +13,9 @@ spec:
         app: auth
     spec:
       containers:
-      - name: auth
-        image: authentic048/ticketing/auth 
-        imagePullPolicy: Never
+        - name: auth
+          image: us.gcr.io/ticketing-323203/auth
+          # imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
@@ -23,13 +23,9 @@ metadata:
   name: auth-srv
 spec:
   selector:
-    app: auth 
+    app: auth
   ports:
     - name: auth
       protocol: TCP
       port: 5000
       targetPort: 5000
-   
-      
-
-
