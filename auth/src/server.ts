@@ -1,11 +1,14 @@
-import express from 'express';
+import { connectDB } from './config/db';
+import { app } from './app';
 
-const app = express();
+const PORT = process.env.PORT || 5000;
 
-app.get('/api/users/test', (req, res) => {
-  res.json("It's working.....");
-});
+const start = () => {
+  connectDB();
 
-app.listen(5000, () => {
-  console.log('App is running on port 5000 !!!!');
-});
+  app.listen(PORT, () => {
+    console.log(`App in development is running on ${PORT}`);
+  });
+};
+
+start();
