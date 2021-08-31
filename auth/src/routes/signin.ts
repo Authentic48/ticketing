@@ -39,7 +39,7 @@ route.post(
         id: existingUser.id,
         email: existingUser.email,
       },
-      'n.aljhdybskbgsaSCYS'
+      process.env.JWT_KEY!
     );
 
     req.session = { jwt: userJwt };
