@@ -4,6 +4,7 @@ import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from '@authentic48/common';
 
 import { signUp } from './routes/signup';
+import { signIn } from './routes/signin';
 
 const app = express();
 app.set('trust proxy', true);
@@ -16,6 +17,7 @@ app.use(
 );
 
 app.use(signUp);
+app.use(signIn);
 
 app.all('*', async () => {
   throw new NotFoundError();
