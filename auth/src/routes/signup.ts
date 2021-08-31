@@ -1,6 +1,7 @@
 import { BadRequest, validationRequest } from '@authentic48/common';
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
+import jwt from 'jsonwebtoken';
 
 import { User } from '../models/user';
 
@@ -33,7 +34,17 @@ route.post(
     });
     await user.save();
 
-    return res.send(user);
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      'n.aljhdybskbgsaSCYS'
+    );
+
+    req.session = { jwt: userJwt };
+
+    res.status(201).json(user);
   }
 );
 
