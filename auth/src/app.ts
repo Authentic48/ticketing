@@ -5,6 +5,7 @@ import { errorHandler, NotFoundError } from '@authentic48/common';
 
 import { signUp } from './routes/signup';
 import { signIn } from './routes/signin';
+import { signOut } from './routes/signout';
 
 const app = express();
 app.set('trust proxy', true);
@@ -18,6 +19,7 @@ app.use(
 
 app.use(signUp);
 app.use(signIn);
+app.use(signOut);
 
 app.all('*', async () => {
   throw new NotFoundError();
