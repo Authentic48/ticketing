@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --poll src/server.ts"
+    "start": "ts-node-dev --poll src/server.ts",
+    "test": "jest --watchAll --no-cache"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -24,6 +32,12 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-session": "^2.0.43",
-    "@types/jsonwebtoken": "^8.5.5"
+    "@types/jest": "^27.0.1",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/supertest": "^2.0.11",
+    "jest": "^27.1.0",
+    "mongodb-memory-server": "^7.3.6",
+    "supertest": "^6.1.6",
+    "ts-jest": "^27.0.5"
   }
 }
