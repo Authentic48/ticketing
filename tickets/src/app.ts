@@ -8,6 +8,7 @@ import {
 } from '@authentic48/common';
 
 import { createTicketRouter } from './routes/new';
+import { showTicketRoute } from './routes/show';
 
 const app = express();
 app.set('trust proxy', true);
@@ -20,6 +21,7 @@ app.use(
 );
 app.use(currentLogInUser);
 app.use(createTicketRouter);
+app.use(showTicketRoute);
 
 app.all('*', async () => {
   throw new NotFoundError();
