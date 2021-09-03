@@ -9,6 +9,7 @@ import {
 
 import { createTicketRouter } from './routes/new';
 import { showTicketRoute } from './routes/show';
+import { indexTicketRoute } from './routes/index';
 
 const app = express();
 app.set('trust proxy', true);
@@ -22,6 +23,7 @@ app.use(
 app.use(currentLogInUser);
 app.use(createTicketRouter);
 app.use(showTicketRoute);
+app.use(indexTicketRoute);
 
 app.all('*', async () => {
   throw new NotFoundError();
