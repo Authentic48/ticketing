@@ -17,6 +17,14 @@ const start = () => {
 
   natsWrapper.connect('ticketing', '123', 'http://nats-srv:4222');
 
+  natsWrapper.client.on('close', () => {
+    console.log('NATS connection closed!');
+    process.exit();
+  });
+
+  process.on('SIGINT', () => natsWrapper.client.close());
+  process.on('SIGTERM', () => natsWrapper.client.close());
+
   app.listen(PORT, () => {
     console.log(`App in development is running on ${PORT}`);
   });
