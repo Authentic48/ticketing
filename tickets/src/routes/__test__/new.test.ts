@@ -4,6 +4,9 @@ import { app } from '../../app';
 import { Ticket } from '../../models/ticket';
 
 describe('POST /api/tickets', () => {
+  beforeEach(() => {
+    jest.mock('../../config/nats-wrapper');
+  });
   it('has a route handler listening to /api/tickets for post request', async () => {
     const response = await request(app).post('/api/tickets').send({});
 
