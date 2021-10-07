@@ -56,23 +56,23 @@ describe('POST /api/tickets', () => {
       })
       .expect(201);
 
-    // expect(natsWrapper.client.publish).toHaveBeenCalled();
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
 
-    // tickets = await Ticket.find({});
-    // expect(tickets.length).toEqual(1);
-    // expect(tickets[0].price).toEqual(10);
+    tickets = await Ticket.find({});
+    expect(tickets.length).toEqual(1);
+    expect(tickets[0].price).toEqual(10);
   });
 
-  // it('publishes an event', async () => {
-  //   await request(app)
-  //     .post('/api/tickets')
-  //     .set('Cookie', global.signin())
-  //     .send({
-  //       title: 'test title',
-  //       price: 10,
-  //     })
-  //     .expect(201);
+  it('publishes an event', async () => {
+    await request(app)
+      .post('/api/tickets')
+      .set('Cookie', global.signin())
+      .send({
+        title: 'test title',
+        price: 10,
+      })
+      .expect(201);
 
-  //   console.log(natsWrapper);
-  // });
+    console.log(natsWrapper);
+  });
 });
