@@ -56,8 +56,6 @@ describe('POST /api/tickets', () => {
       })
       .expect(201);
 
-    expect(natsWrapper.client.publish).toHaveBeenCalled();
-
     tickets = await Ticket.find({});
     expect(tickets.length).toEqual(1);
     expect(tickets[0].price).toEqual(10);
@@ -72,7 +70,6 @@ describe('POST /api/tickets', () => {
         price: 10,
       })
       .expect(201);
-
-    console.log(natsWrapper);
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
   });
 });
