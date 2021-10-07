@@ -1,6 +1,6 @@
 import { connectDB } from './config/db';
 import { app } from './app';
-import { natsWrapper } from './config/nats-wrapper';
+import { natsWrapper } from './nats-wrapper';
 
 const PORT = process.env.PORT || 5000;
 

@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 import { requireAuth, validationRequest } from '@authentic48/common';
 import { Ticket } from '../models/ticket';
 import { TicketCreatedPublisher } from '../events/publishers/ticket-created-publisher';
-import { natsWrapper } from '../config/nats-wrapper';
+import { natsWrapper } from '../nats-wrapper';
 
 const route = express.Router();
 
