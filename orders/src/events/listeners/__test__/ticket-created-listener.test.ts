@@ -15,7 +15,7 @@ const setup = async () => {
     version: 0,
   };
 
-  //@ts-ignore
+  // @ts-ignore
   const msg: Message = {
     ack: jest.fn(),
   };
@@ -27,7 +27,6 @@ it('creates and saves a ticket', async () => {
 
   await listener.onMessage(data, msg);
 
-  console.log(data);
   const ticket = await Ticket.findById(data.id);
 
   expect(ticket).toBeDefined();

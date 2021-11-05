@@ -20,11 +20,6 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
 
     await ticket.save();
 
-    console.log(ticket);
-
-    const findTicket = await Ticket.findById(ticket.id);
-    console.log(findTicket);
-
     msg.ack();
   }
 }
