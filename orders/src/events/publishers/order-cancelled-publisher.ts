@@ -1,5 +1,5 @@
-import { Publisher, OrderCreatedEvent, Subjects } from '@authentic48/common';
+import { Publisher, OrderCancelledEvent, Subjects } from '@authentic48/common';
 
-export class OrderCreatedPublisher extends Publisher<OrderCreatedEvent> {
-  readonly subject = Subjects.OrderCreated;
+export class OrderCancelledPublisher extends Publisher<OrderCancelledEvent> {
+  readonly subject = Subjects.OrderCancelled;
 }

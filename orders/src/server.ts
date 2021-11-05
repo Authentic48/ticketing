@@ -4,7 +4,7 @@ import { natsWrapper } from './nats-wrapper';
 
 const PORT = process.env.PORT || 5000;
 
-const start = () => {
+const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
@@ -26,7 +26,7 @@ const start = () => {
 
   connectDB();
 
-  natsWrapper.connect(
+  await natsWrapper.connect(
     process.env.NATS_CLUSTER_ID,
     process.env.NATS_CLIENT_ID,
     process.env.NATS_URL
