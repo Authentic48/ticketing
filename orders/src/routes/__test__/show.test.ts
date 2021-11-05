@@ -12,6 +12,7 @@ describe('GET /api/orders', () => {
     const ticket = Ticket.build({
       title: 'concert',
       price: 20,
+      userId: 'bdsajbygf',
     });
     await ticket.save();
 
@@ -40,6 +41,7 @@ describe('GET /api/orders', () => {
     const ticket = Ticket.build({
       title: 'concert',
       price: 20,
+      userId: 'bdsajbygf',
     });
     await ticket.save();
 

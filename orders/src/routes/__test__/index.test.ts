@@ -10,6 +10,7 @@ const buildTicket = async () => {
   const ticket = Ticket.build({
     title: 'concert',
     price: 20,
+    userId: 'bdsajbygf',
   });
   await ticket.save();
 
