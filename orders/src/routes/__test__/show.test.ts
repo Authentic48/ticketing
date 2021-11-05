@@ -10,9 +10,11 @@ describe('GET /api/orders', () => {
   it('fetches the order', async () => {
     //  create a ticket
     const ticket = Ticket.build({
+      id: new mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
       userId: 'bdsajbygf',
+      version: 0,
     });
     await ticket.save();
 
@@ -39,9 +41,11 @@ describe('GET /api/orders', () => {
   it("returns an error if user try to error another user's orders", async () => {
     //  create a ticket
     const ticket = Ticket.build({
+      id: new mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
       userId: 'bdsajbygf',
+      version: 0,
     });
     await ticket.save();
 

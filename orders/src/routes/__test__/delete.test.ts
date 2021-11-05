@@ -10,9 +10,11 @@ describe('GET /api/orders', () => {
   it('marks an order as cancelled', async () => {
     //  create a ticket with Ticket Model
     const ticket = Ticket.build({
+      id: new mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
       userId: 'bdsajbygf',
+      version: 0,
     });
     await ticket.save();
 
@@ -42,9 +44,11 @@ describe('GET /api/orders', () => {
   it('emits an order cancelled event', async () => {
     //  create a ticket with Ticket Model
     const ticket = Ticket.build({
+      id: new mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
       userId: 'bdsajbygf',
+      version: 0,
     });
     await ticket.save();
 
