@@ -3,6 +3,8 @@ import express, { Request, Response } from 'express';
 import { Order } from '../models/order';
 import { OrderStatus } from '@authentic48/common';
 import { NotAuthorizedError, NotFoundError } from '@authentic48/common';
+import { OrderCancelledPublisher } from '../events/publishers/order-cancelled-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -25,6 +27,14 @@ router.delete(
     await order.save();
 
     // publish an event saying this was cancelled
+    new OrderCancelledPublisher(natsWrapper.client).publish({
+      id: order.id,
+      status: OrderStatus.Cancelled,
+      version: order.version,
+      ticket: {
+        id: order.ticket.id,
+      },
+    });
 
     return res.status(204).send(order);
   }

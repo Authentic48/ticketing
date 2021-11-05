@@ -12,6 +12,7 @@ describe('GET /api/orders', () => {
     const ticket = Ticket.build({
       title: 'concert',
       price: 20,
+      userId: 'bdsajbygf',
     });
     await ticket.save();
 
@@ -38,5 +39,32 @@ describe('GET /api/orders', () => {
     expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled);
   });
 
-  it.todo('emits an order cancelled event');
+  it('emits an order cancelled event', async () => {
+    //  create a ticket with Ticket Model
+    const ticket = Ticket.build({
+      title: 'concert',
+      price: 20,
+      userId: 'bdsajbygf',
+    });
+    await ticket.save();
+
+    const user = global.signin();
+    // Make a request to create order for this ticket
+    const { body: order } = await request(app)
+      .post('/api/orders/')
+      .set('Cookie', user)
+      .send({
+        ticketId: ticket.id,
+      })
+      .expect(201);
+
+    // Make request to cancel the order
+    await request(app)
+      .delete(`/api/orders/${order.id}/`)
+      .set('Cookie', user)
+      .send()
+      .expect(204);
+
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
+  });
 });
