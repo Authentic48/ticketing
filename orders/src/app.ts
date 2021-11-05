@@ -1,11 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
-import {
-  currentLogInUser,
-  errorHandler,
-  NotFoundError,
-} from '@authentic48/common';
+import { currentUser, errorHandler, NotFoundError } from '@authentic48/common';
 import { createOrderRouter } from './routes/new';
 import { showOrderRouter } from './routes/show';
 import { deleteOrderRouter } from './routes/delete';
@@ -20,7 +16,7 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   })
 );
-app.use(currentLogInUser);
+app.use(currentUser);
 app.use(createOrderRouter);
 app.use(showOrderRouter);
 app.use(deleteOrderRouter);

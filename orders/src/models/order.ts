@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { OrderStatus } from '../common/order-status';
+import { OrderStatus } from '@authentic48/common';
 import { TicketDoc } from './ticket';
 
 interface OrderAttrs {

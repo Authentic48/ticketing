@@ -1,7 +1,7 @@
 import { requireAuth } from '@authentic48/common';
 import express, { Request, Response } from 'express';
 import { Order } from '../models/order';
-import { OrderStatus } from '../common/order-status';
+import { OrderStatus } from '@authentic48/common';
 import { NotAuthorizedError, NotFoundError } from '@authentic48/common';
 
 const router = express.Router();
@@ -23,6 +23,9 @@ router.delete(
 
     order.status = OrderStatus.Cancelled;
     await order.save();
+
+    // publish an event saying this was cancelled
+
     return res.status(204).send(order);
   }
 );

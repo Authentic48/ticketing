@@ -4,7 +4,7 @@ import { app } from '../../app';
 import { Ticket } from '../../models/ticket';
 import { Order } from '../../models/order';
 import { natsWrapper } from '../../nats-wrapper';
-import { OrderStatus } from '../../common/order-status';
+import { OrderStatus } from '@authentic48/common';
 
 describe('POST /api/orders', () => {
   it('return an error if the ticket does not exist', async () => {

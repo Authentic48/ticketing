@@ -1,15 +1,15 @@
 import express, { Request, Response } from 'express';
 import {
-  BadRequest,
+  BadRequestError,
   NotFoundError,
   requireAuth,
-  validationRequest,
+  validateRequest,
+  OrderStatus,
 } from '@authentic48/common';
 import { body } from 'express-validator';
 import mongoose from 'mongoose';
 import { Ticket } from '../models/ticket';
 import { Order } from '../models/order';
-import { OrderStatus } from '../common/order-status';
 
 const router = express.Router();
 
@@ -24,7 +24,7 @@ router.post(
       .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
       .withMessage('TicketId must be provided'),
   ],
-  validationRequest,
+  validateRequest,
   async (req: Request, res: Response) => {
     const { ticketId } = req.body;
     // Find the ticket the user is trying to order in the the database
@@ -40,7 +40,7 @@ router.post(
     // If we find an order from that means the ticket *is* reserved
     const isReserved = await ticket.isReserved();
     if (isReserved) {
-      throw new BadRequest('Ticket is already reserved');
+      throw new BadRequestError('Ticket is already reserved');
     }
 
     // Calculate an expiration date for this order

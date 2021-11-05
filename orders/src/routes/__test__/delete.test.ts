@@ -4,7 +4,7 @@ import { app } from '../../app';
 import { Ticket } from '../../models/ticket';
 import { Order } from '../../models/order';
 import { natsWrapper } from '../../nats-wrapper';
-import { OrderStatus } from '../../common/order-status';
+import { OrderStatus } from '@authentic48/common';
 
 describe('GET /api/orders', () => {
   it('marks an order as cancelled', async () => {
@@ -37,4 +37,6 @@ describe('GET /api/orders', () => {
 
     expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled);
   });
+
+  it.todo('emits an order cancelled event');
 });
