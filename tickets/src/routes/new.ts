@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { requireAuth, validationRequest } from '@authentic48/common';
+import { requireAuth, validateRequest } from '@authentic48/common';
 import { Ticket } from '../models/ticket';
 import { TicketCreatedPublisher } from '../events/publishers/ticket-created-publisher';
 import { natsWrapper } from '../nats-wrapper';
@@ -16,11 +16,11 @@ route.post(
       .isFloat({ gt: 0 })
       .withMessage('Price must be greater than zero'),
   ],
-  validationRequest,
+  validateRequest,
   async (req: Request, res: Response) => {
     const { title, price } = req.body;
 
-    const ticket = await Ticket.build({
+    const ticket = Ticket.build({
       title,
       price,
       userId: req.currentUser!.id,
@@ -33,6 +33,7 @@ route.post(
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
+      version: ticket.version,
     });
     return res.status(201).send(ticket);
   }

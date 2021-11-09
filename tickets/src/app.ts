@@ -1,11 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
-import {
-  currentLogInUser,
-  errorHandler,
-  NotFoundError,
-} from '@authentic48/common';
+import { currentUser, errorHandler, NotFoundError } from '@authentic48/common';
 
 import { createTicketRouter } from './routes/new';
 import { showTicketRoute } from './routes/show';
@@ -21,7 +17,7 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   })
 );
-app.use(currentLogInUser);
+app.use(currentUser);
 app.use(createTicketRouter);
 app.use(showTicketRoute);
 app.use(indexTicketRoute);

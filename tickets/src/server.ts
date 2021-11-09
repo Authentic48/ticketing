@@ -1,10 +1,12 @@
 import { connectDB } from './config/db';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
+import { OrderCreatedListener } from './events/listeners/order-created-listener';
+import { OrderCancelledListener } from './events/listeners/order-cancelled-listener';
 
 const PORT = process.env.PORT || 5000;
 
-const start = () => {
+const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
@@ -26,11 +28,14 @@ const start = () => {
 
   connectDB();
 
-  natsWrapper.connect(
+  await natsWrapper.connect(
     process.env.NATS_CLUSTER_ID,
     process.env.NATS_CLIENT_ID,
     process.env.NATS_URL
   );
+
+  new OrderCreatedListener(natsWrapper.client).listen();
+  new OrderCancelledListener(natsWrapper.client).listen();
 
   natsWrapper.client.on('close', () => {
     console.log('NATS connection closed!');

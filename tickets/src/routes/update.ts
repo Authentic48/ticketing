@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import {
   requireAuth,
-  validationRequest,
+  validateRequest,
   NotAuthorizedError,
   NotFoundError,
 } from '@authentic48/common';
@@ -21,7 +21,7 @@ route.put(
       .isFloat({ gt: 0 })
       .withMessage('Price must be greater than zero'),
   ],
-  validationRequest,
+  validateRequest,
   async (req: Request, res: Response) => {
     const { title, price } = req.body;
 
@@ -47,6 +47,7 @@ route.put(
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
+      version: ticket.version,
     });
     return res.send(ticket);
   }
