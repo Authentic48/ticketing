@@ -15,7 +15,6 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
       price,
       title,
       userId,
-      version,
     });
 
     await ticket.save();

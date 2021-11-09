@@ -25,7 +25,6 @@ describe('POST /api/orders', () => {
       title: 'concert',
       price: 20,
       userId: 'bdsajbygf',
-      version: 0,
     });
     await ticket.save();
 
@@ -53,7 +52,6 @@ describe('POST /api/orders', () => {
       title: 'concert',
       price: 20,
       userId: 'bdsajbygf',
-      version: 0,
     });
     await ticket.save();
 
@@ -69,7 +67,6 @@ describe('POST /api/orders', () => {
       title: 'concert',
       price: 20,
       userId: 'bdsajbygf',
-      version: 0,
     });
     await ticket.save();
 

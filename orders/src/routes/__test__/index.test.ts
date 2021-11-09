@@ -12,7 +12,6 @@ const buildTicket = async () => {
     title: 'concert',
     price: 20,
     userId: 'bdsajbygf',
-    version: 0,
   });
   await ticket.save();
 

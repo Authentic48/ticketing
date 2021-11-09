@@ -13,16 +13,15 @@ const setup = async () => {
     title: 'concert',
     price: 26,
     userId: new mongoose.Types.ObjectId().toHexString(),
-    version: 0,
   });
 
   await ticket.save();
 
   const data: TicketUpdatedEvent['data'] = {
-    id: new mongoose.Types.ObjectId().toHexString(),
+    id: ticket.id,
     title: 'concert update',
     price: 265,
-    userId: new mongoose.Types.ObjectId().toHexString(),
+    userId: ticket.userId,
     version: ticket.version + 1,
   };
 
@@ -33,12 +32,12 @@ const setup = async () => {
 
   return { listener, data, msg, ticket };
 };
-it('creates and saves a ticket', async () => {
+it('finds, updates and saves a ticket', async () => {
   const { listener, data, msg, ticket } = await setup();
 
   await listener.onMessage(data, msg);
 
-  const updatedTicket = await Ticket.findById(data.id);
+  const updatedTicket = await Ticket.findById(ticket.id);
 
   expect(updatedTicket).toBeDefined();
   expect(updatedTicket!.title).toEqual(data.title);
