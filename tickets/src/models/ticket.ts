@@ -10,6 +10,8 @@ interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
   userId: string;
+  orderId?: string;
+  version: number;
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {

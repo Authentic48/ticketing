@@ -1,5 +1,5 @@
-import { Publihser, TicketCreatedEvent, Subjects } from '@authentic48/common';
+import { Publisher, TicketCreatedEvent, Subjects } from '@authentic48/common';
 
-export class TicketCreatedPublisher extends Publihser<TicketCreatedEvent> {
+export class TicketCreatedPublisher extends Publisher<TicketCreatedEvent> {
   readonly subject = Subjects.TicketCreated;
 }
