@@ -3,6 +3,7 @@ import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
 import { TicketUpdatedListener } from './events/listeners/ticket-updated-listener';
 import { TicketCreatedListener } from './events/listeners/ticket-created-listener';
+import { ExpirationcompleteListener } from './events/listeners/expiration-complete-listener';
 
 const PORT = process.env.PORT || 5000;
 
@@ -36,6 +37,7 @@ const start = async () => {
 
   new TicketCreatedListener(natsWrapper.client).listen();
   new TicketUpdatedListener(natsWrapper.client).listen();
+  new ExpirationcompleteListener(natsWrapper.client).listen();
   natsWrapper.client.on('close', () => {
     console.log('NATS connection closed!');
     process.exit();
