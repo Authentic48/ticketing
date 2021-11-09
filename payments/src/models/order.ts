@@ -3,15 +3,15 @@ import { OrderStatus } from '@authentic48/common';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 interface OrderAttrs {
+  id: string;
   userId: string;
   status: OrderStatus;
-  expiresAt: Date;
+  version: number;
 }
 
 interface OrderDoc extends mongoose.Document {
   userId: string;
   status: OrderStatus;
-  expiresAt: Date;
   version: number;
 }
 
@@ -30,9 +30,6 @@ const orderSchema = new mongoose.Schema(
       required: true,
       enum: Object.values(OrderStatus),
       default: OrderStatus.Created,
-    },
-    expiresAt: {
-      type: mongoose.Schema.Types.Date,
     },
   },
   {
