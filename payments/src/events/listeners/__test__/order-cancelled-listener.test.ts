@@ -1,5 +1,5 @@
 import { OrderCancelledEvent, OrderStatus } from '@authentic48/common';
-import { natsWrapper } from '../../../natsWrapper';
+import { natsWrapper } from '../../../nats-wrapper';
 import { OrderCancelledListener } from '../order-cancelled-listener';
 import mongoose from 'mongoose';
 import { Message } from 'node-nats-streaming';
