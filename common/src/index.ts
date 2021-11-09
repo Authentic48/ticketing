@@ -16,4 +16,6 @@ export * from './events/subject';
 export * from './events/order-created-event';
 export * from './events/order-cancelled-event';
 export * from './types/order-status';
+export * from './events/payment-created-event';
 export * from './events/expration-complete-event';
+
