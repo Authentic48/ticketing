@@ -44,7 +44,7 @@ route.post(
 
     req.session = { jwt: userJwt };
 
-    res.status(201).json(user);
+    res.status(201).json(user); // great! proper use of HTTP status codes
   }
 );
 

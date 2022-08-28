@@ -7,6 +7,7 @@ route.get(
   '/api/users/currentuser',
   currentLogInUser,
   (req: Request, res: Response) => {
+    // TODO: Usually here you want to return more details about user
     res.json({ currentUser: req.currentUser || null });
   }
 );
