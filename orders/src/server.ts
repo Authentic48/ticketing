@@ -9,6 +9,9 @@ import { PaymentCreatedListener } from './events/listeners/payment-created-liste
 const PORT = process.env.PORT || 5000;
 
 const start = async () => {
+  // TODO: you can move all this Config code validation to a separate config module that reads the env variables
+  //       and validate them with Joi npm package and fail on app start up if env var are not correctly set.
+  //       see Auth app in src/config/index.ts
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
@@ -30,6 +33,9 @@ const start = async () => {
 
   connectDB();
 
+  // TODO: IMO i'd move all this NATs setup and startup code to a NATs module similar to config module
+  //       and there do all the start up logic and validation and exports some services so other modules
+  //       can use to interact with NATs stuff.
   await natsWrapper.connect(
     process.env.NATS_CLUSTER_ID,
     process.env.NATS_CLIENT_ID,
