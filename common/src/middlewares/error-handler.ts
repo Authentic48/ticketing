@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import { CustomError } from '../errors/custom-error';
 
+// TODO: this error handler will not work for Promises that reject in Async-Await context. this down-sides of express 
+//       take a look at this article: https://codefibershq.com/blog/handling-promise-rejections-in-expressjs-nodejs-with-ease
+//       
 export const errorHandler = (
   err: Error,
   req: Request,
